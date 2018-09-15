@@ -11,14 +11,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    auto index = ui->tabWidget->tabBar()->addTab("");
-    ui->tabWidget->tabBar()->setTabEnabled(index, false);
     auto button = new QPushButton("Add");
     connect(button, &QPushButton::clicked, [=]{
         auto index = ui->tabWidget->count() - 1;
-        ui->tabWidget->insertTab(index, new QWidget(), QString("Tab_%1").arg(index + 1));
+        ui->tabWidget->addTab(new QWidget(), QString("Tab_%1").arg(index + 1));
     });
-    ui->tabWidget->tabBar()->setTabButton(index, QTabBar::RightSide, button);
+    ui->tabWidget->setCornerWidget(button, Qt::TopLeftCorner);
 }
 
 MainWindow::~MainWindow()
